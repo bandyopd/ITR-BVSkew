@@ -9,4 +9,5 @@ A dataset of 1000 randomly selected subjects from the HealthPartners data. For e
 ## RealDataAnalysis.R
 This R code implements the methodology
 
-Reference: Fan Y and Bandyopadhyay D. (2025+). Regression-based individualized treatment rules for skewed bivariate outcomes with informative follow-up, (Submitted)
+## Reference
+Fan Y and Bandyopadhyay D. (2025+). Regression-based individualized treatment rules for skewed bivariate outcomes with informative follow-up, (Submitted)
