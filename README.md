@@ -1,4 +1,4 @@
-# Description of the code and associated functions for running a simulated data
+# Description of the code and associated functions for fitting our proposed model to a dataset
 
 ## myfunction.R 
 List of functions to be called; see RealDataAnalysis.R  
@@ -8,3 +8,5 @@ A dataset of 1000 randomly selected subjects from the HealthPartners data. For e
 
 ## RealDataAnalysis.R
 This R code implements the methodology
+
+Reference: Fan Y and Bandyopadhyay D. (2025+). Regression-based individualized treatment rules for skewed bivariate outcomes with informative follow-up, (Submitted)
