@@ -1,8 +1,8 @@
 
 ###############################################################################
 #### The R code below conducts data fitting (for 1000 randomly selected subjects from the HP data) using the proposed methodology in the manuscript below. 
-#### Manuscript: Fan Y and Bandyopadhyay D. (2024+). Regression-based individualized treatment rules for skewed bivariate outcomes with informative follow-up, (Submitted)
-Authors: Yiwei Fan and Dipankar Bandyopadhyay
+#### Manuscript: Fan Y and Bandyopadhyay D. (2025+). Regression-based individualized treatment rules for skewed bivariate outcomes with informative follow-up, (Submitted)
+#### Authors: Yiwei Fan and Dipankar Bandyopadhyay
 ###############################################################################
 
 
@@ -19,6 +19,7 @@ dim(mydf)
 ################################ 
 visiting model
 #################################
+
 
 install.packages("IrregLong", repos='http://cran.us.r-project.org')
 library(IrregLong)
@@ -39,7 +40,8 @@ mydf1$PD2.lag=(mydf1$PD.lag)^2
 #############################
 
 library(survival)
-mph=coxph(Surv(cumdelta.lag,cumdelta,event)~.-id+cluster(id), data=mydf1)
+mph=coxph(Surv(cumdelta.lag,cumdelta,event)~.-id+cluster(id),
+          data=mydf1)
 coef(mph)
 summary(mph)
 ####step-wise feature selection
@@ -56,6 +58,7 @@ range(weight)
 ### Extract baseline CAL, PPD, and Treatment
 ####################################
 
+
 first=match(unique(mydf$id),mydf$id)
 mydf$BASE_CAL=rep(mydf[first,"CAL"],table(mydf$id))
 mydf$BASE_PPD=rep(mydf[first,"PD"],table(mydf$id))
@@ -67,6 +70,8 @@ colnames(mydf)
 #########################################
 ### Fitting marginal models
 #########################################
+
+
 install.packages(c("glmtoolbox", "statmod", "fda", "tweedie"), repos='http://cran.us.r-project.org')
 library(glmtoolbox)
 library(statmod)
@@ -75,7 +80,8 @@ library(tweedie)
 
 ####CAL
 mydf2=mydf[,c(3,5:14,17,19:21)]
-mydf2=mydf2[-first,]
+last=c(first[-1]-1,nrow(mydf))
+mydf2=mydf2[-last,]
 colnames(mydf2)
 
 #########time varying
@@ -88,6 +94,7 @@ temp=eval.basis(mydf$cumdelta[-first],Bspline)
 n_B=length(Bspline$names)
 subdf=mydf2
 subdf=subdf[,c(12,1:5,10,13,15,11)]
+subdf$CAL=mydf$CAL[-first]
 colnames(subdf)
 
 #######interation term
@@ -110,6 +117,8 @@ subdf=cbind(subdf[,-c(4,10)],tempX1,tempX2)
 #########################
 ### GEE for Tweedie distribution
 ##########################
+
+
 library(glmtoolbox)
 library(tweedie)
 library(statmod)
@@ -152,12 +161,14 @@ Y1_pred1=exp((c(Y1_wfit$coefficients)[-1])%*%t(newdf)+c(Y1_wfit$coefficients)[1]
 
 ##################################################
 #####PPD
+###############################################
 colnames(mydf)
-mydf3=mydf[-first,c(4:14,17,20,21)]
+mydf3=mydf[-last,c(4:14,17,20,21)]
 
 ####time varying: AGE1, RACE1(TX_IND1)
 subdf=mydf3[,-c(6,9)]
 subdf=subdf[,c(10,1:5,8,11,12,9)]
+subdf$PD=mydf$PD[-first]
 
 ####interation terms
 subdf$AT=subdf$AGE1*subdf$TX_IND1
@@ -256,7 +267,7 @@ colnames(tempX)
 
 
 ###########estimated results
-set.seed(561)###
+set.seed(5)###
 final=c()
 est=optim(runif(ncol(tempX),-1,1),fn=ass_f,w=1/weight[-first],
           method="BFGS")
