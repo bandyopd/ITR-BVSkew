@@ -8,7 +8,9 @@
 
 rm(list = ls())
 
-setwd("G:\\My Drive\\OneDrive\\Work\\YiweiFan_Renmin\\ITRProject_Code\\")
+### Specify the directory you will be working from 
+
+setwd("G:\\My Drive\\...\\")
 
 source("myfunction.R")
 mydf=read.csv("example_data.csv")
