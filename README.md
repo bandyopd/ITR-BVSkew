@@ -1,4 +1,4 @@
-# Description of the code and associated functions for fitting our proposed model to a dataset
+# Description of the R code and associated functions for fitting our proposed model to a randomly generated dataset
 
 ## myfunctions.R 
 List of functions to be called; see analysis.R  
