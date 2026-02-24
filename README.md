@@ -1,13 +1,13 @@
 # Description of the code and associated functions for fitting our proposed model to a dataset
 
-## myfunction.R 
-List of functions to be called; see RealDataAnalysis.R  
+## myfunctions.R 
+List of functions to be called; see analysis.R  
 
 ## example_data.csv
-A dataset of 1000 randomly selected subjects from the HealthPartners data. For ethical reasons, the full dataset can't be shared.
+A dataset of 2464 randomly selected subjects from the HealthPartners data. For ethical reasons, the full dataset can't be shared.
 
-## RealDataAnalysis.R
+## analysis.R
 This R code implements the methodology
 
 ## Reference
-Fan Y and Bandyopadhyay D. (2025+). Regression-based individualized treatment rules for skewed bivariate outcomes with informative follow-up, (Submitted)
+Fan Y and Bandyopadhyay D. (2026+). Individualized treatment rules for bivariate outcomes with informative follow-up: Application to periodontal health, (Submitted)
